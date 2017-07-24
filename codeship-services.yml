@@ -1,0 +1,8 @@
+php:
+  image: silintl/php7
+  volumes:
+    - ./:/data
+  extra_hosts:
+    - "trusted_host.org:10.0.1.1"
+    - "untrusted_host.org:22.0.1.1"
+  working_dir: /data
