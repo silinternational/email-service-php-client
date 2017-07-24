@@ -76,29 +76,6 @@ class ResponseContext implements Context
         }
     }
 
-    
-    /**
-     * @Then the result should NOT contain user information
-     */
-    public function theResultShouldNotContainUserInformation()
-    {
-        if (is_array($this->result)) {
-            foreach ($this->userInfoFields as $fieldName) {
-                Assert::assertArrayNotHasKey($fieldName, $this->result);
-            }
-        }
-    }
-    
-    /**
-     * @Then the result SHOULD contain user information
-     */
-    public function theResultShouldContainUserInformation()
-    {
-        foreach ($this->userInfoFields as $fieldName) {
-            Assert::assertArrayHasKey($fieldName, $this->result);
-        }
-    }
-
     /**
      * @Then the result should NOT contain an error message
      */
