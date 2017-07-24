@@ -76,7 +76,7 @@ class EmailServiceClient extends BaseClient
 
     /*
      * Validates the config values for ASSERT_VALID_IP_CONFIG and
-     *   ASSERT_VALID_IP_CONFIG
+     *   TRUSTED_IPS_CONFIG
      * Uses them to set $this->assertValidIp and $this->trustedIpRanges
      *
      * @param array the config values for the client
