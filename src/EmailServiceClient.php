@@ -84,9 +84,10 @@ class EmailServiceClient extends BaseClient
      * @return null
      * @throws \InvalidArgumentException
      */
-    private function initializeConfig($config) {
+    private function initializeConfig($config)
+    {
 
-        if ( isset($config[self::ASSERT_VALID_IP_CONFIG])) {
+        if (isset($config[self::ASSERT_VALID_IP_CONFIG])) {
             $this->assertValidIp = $config[self::ASSERT_VALID_IP_CONFIG];
         }
 
@@ -224,7 +225,8 @@ class EmailServiceClient extends BaseClient
      *
      * @throws Exception
      */
-    private function assertTrustedIp() {
+    private function assertTrustedIp()
+    {
         $baseHost = parse_url($this->serviceUri, PHP_URL_HOST);
         $serviceIp = gethostbyname(
             $baseHost

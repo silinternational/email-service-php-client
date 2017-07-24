@@ -1,12 +1,11 @@
 <?php
 namespace Sil\EmailService\Client\features\response;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\PyStringNode;
 use Exception;
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Assert;
 use Sil\EmailService\Client\EmailServiceClient;
