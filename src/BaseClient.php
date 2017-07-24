@@ -2,8 +2,8 @@
 namespace Sil\EmailService\Client;
 
 use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Command\Guzzle\Description;
+use GuzzleHttp\Command\Guzzle\GuzzleClient;
 
 class BaseClient extends GuzzleClient
 {
@@ -43,6 +43,9 @@ class BaseClient extends GuzzleClient
         );
     }
     
+    /**
+     * @return \GuzzleHttp\ClientInterface
+     */
     private function getHttpClientFromConfig(array $config)
     {
         // If a client was provided, return it.
@@ -59,6 +62,9 @@ class BaseClient extends GuzzleClient
         return $client;
     }
     
+    /**
+     * @return \GuzzleHttp\Command\Guzzle\DescriptionInterface
+     */
     private function getDescriptionFromConfig(array $config)
     {
         // If a description was provided, return it.

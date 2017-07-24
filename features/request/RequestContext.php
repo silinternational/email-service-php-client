@@ -267,7 +267,7 @@ class RequestContext implements Context
             Assert::assertTrue(false, $msg);
         }
 
-        $this->assertSame((int) $expectedCode, $e->getCode());
+        $this->assertSame((int)$expectedCode, $e->getCode());
     }
 
     /**
