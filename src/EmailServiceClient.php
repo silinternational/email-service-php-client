@@ -130,40 +130,13 @@ class EmailServiceClient extends BaseClient
 
         $this->assertTrustedIp();
     }
-
-    /**
-     * Attempt to authenticate using the given credentials, getting back
-     * information about the authenticated user (if the credentials were
-     * acceptable) or null (if unacceptable).
-     *
-     * @param string $username The username.
-     * @param string $password The password (in plaintext).
-     * @return array|null An array of user information (if valid), or null.
-     * @throws Exception
-     */
-    public function authenticate(string $username, string $password)
-    {
-        $result = $this->authenticateInternal([
-            'username' => $username,
-            'password' => $password,
-        ]);
-        $statusCode = (int)$result['statusCode'];
-        
-        if ($statusCode === 200) {
-            return $this->getResultAsArrayWithoutStatusCode($result);
-        } elseif ($statusCode === 400) {
-            return null;
-        }
-        
-        $this->reportUnexpectedResponse($result, 1490802360);
-    }
     
     /**
-     * Create a user with the given information.
+     * Create an email with the given information.
      *
      * @param array $config An array key/value pairs of attributes for the new
-     *     user.
-     * @return array An array of information about the new user.
+     *     email.
+     * @return array An array of information about the email.
      * @throws Exception
      */
     public function email(array $config = [])
