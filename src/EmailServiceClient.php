@@ -144,7 +144,7 @@ class EmailServiceClient extends BaseClient
         $result = $this->emailInternal($config);
         $statusCode = (int)$result['statusCode'];
         
-        if ($statusCode === 200) {
+        if ($statusCode >= 200 && $statusCode < 300) {
             return $this->getResultAsArrayWithoutStatusCode($result);
         }
         
