@@ -1,0 +1,9 @@
+composer.phar
+/vendor
+.idea/
+/nbproject/
+*.local.php
+composer.lock
+.vagrant/
+auth.json
+
