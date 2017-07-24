@@ -1,0 +1,8 @@
+default:
+    suites:
+        request_features:
+            paths:    [ features/request ]
+            contexts: [ Sil\EmailService\Client\features\request\RequestContext ]
+        response_features:
+            paths:    [ features/response ]
+            contexts: [ Sil\EmailService\Client\features\response\ResponseContext ]
