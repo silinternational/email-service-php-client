@@ -254,37 +254,11 @@ class RequestContext implements Context
     }
 
     /**
-     * @Then an UntrustedIp exception will be thrown
+     * @Then an exception will be thrown
      */
-    public function anUntrustedipExceptionWillBeThrown()
+    public function anExceptionWillBeThrown()
     {
-        $e = $this->exceptionThrown;
-        $expectedCode = 1494531300;
-
-        if ($e === null) {
-            $msg = 'Expected an exception with code ' . $expectedCode .
-                ' but did not get one at all.';
-            Assert::assertTrue(false, $msg);
-        }
-
-        $this->assertSame((int)$expectedCode, $e->getCode());
-    }
-
-    /**
-     * @Then an InvalidArgument exception will be thrown
-     */
-    public function anInvalidargumentExceptionWillBeThrown()
-    {
-        $e = $this->exceptionThrown;
-        $expectedException = 'InvalidArgumentException';
-
-        if ($e === null) {
-            $msg = 'Expected an exception with code ' . $expectedException .
-                ' but did not get one at all.';
-            Assert::assertTrue(false, $msg);
-        }
-
-        $this->assertSame($expectedException, get_class($e));
+        Assert::assertInstanceOf('Exception', $this->exceptionThrown);
     }
 
     /**

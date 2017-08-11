@@ -17,19 +17,19 @@ Feature: Formatting requests for sending to the Email Service API
   Scenario: Checking client with untrusted email-service
     Given I am using an untrusted baseUri
     When I create the emailServiceClient
-    Then an UntrustedIp exception will be thrown
+    Then an exception will be thrown
 
   Scenario: Checking client with a single trusted ip block value
     Given I have not indicated whether the email service ip should be validated
       And I am using a single value for a trusted ip block
     When I create the emailServiceClient
-    Then an InvalidArgument exception will be thrown
+    Then an exception will be thrown
 
   Scenario: Checking client with the assert_valid_ip not given and the trusted_ip_ranges value missing
     Given I am using a baseUri of "https://api.example.com/"
       And I have not indicated whether the email service ip should be validated
     When I create the emailServiceClient
-    Then an InvalidArgument exception will be thrown
+    Then an exception will be thrown
 
   Scenario: Creating a email
     Given I am using a baseUri of "https://api.example.com/"

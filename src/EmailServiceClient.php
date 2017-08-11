@@ -1,7 +1,6 @@
 <?php
 namespace Sil\EmailService\Client;
 
-use Exception;
 use GuzzleHttp\Command\Result;
 use IPBlock;
 
@@ -35,6 +34,7 @@ class EmailServiceClient extends BaseClient
      *     Example: 'https://api.example.com/'.
      * @param string $accessToken - Your authorization access (bearer) token.
      * @param array $config - Any other configuration settings.
+     * @throws EmailServiceClientException
      */
     public function __construct(
         string $baseUri,
@@ -42,7 +42,7 @@ class EmailServiceClient extends BaseClient
         array $config = []
     ) {
         if (empty($baseUri)) {
-            throw new \InvalidArgumentException(
+            throw new EmailServiceClientException(
                 'Please provide a base URI for the Email Service.',
                 1494531101
             );
@@ -51,7 +51,7 @@ class EmailServiceClient extends BaseClient
         $this->serviceUri = $baseUri;
         
         if (empty($accessToken)) {
-            throw new \InvalidArgumentException(
+            throw new EmailServiceClientException(
                 'Please provide an access token for the Email Service.',
                 1494531108
             );
@@ -77,12 +77,18 @@ class EmailServiceClient extends BaseClient
     /*
      * Validates the config values for ASSERT_VALID_IP_CONFIG and
      *   TRUSTED_IPS_CONFIG
+     *
+     *
+     *
+     *
+
+
      * Uses them to set $this->assertValidIp and $this->trustedIpRanges
      *
      * @param array the config values for the client
      *
      * @return null
-     * @throws \InvalidArgumentException
+     * @throws EmailServiceClientException
      */
     private function initializeConfig($config)
     {
@@ -101,7 +107,7 @@ class EmailServiceClient extends BaseClient
          *  any trusted IPs, throw an exception
          */
         if (empty($config[self::TRUSTED_IPS_CONFIG])) {
-            throw new \InvalidArgumentException(
+            throw new EmailServiceClientException(
                 'The config entry for ' . self::TRUSTED_IPS_CONFIG .
                 ' must be set (as an array) when ' .
                 self::ASSERT_VALID_IP_CONFIG .
@@ -116,7 +122,7 @@ class EmailServiceClient extends BaseClient
          */
         $newTrustedIpRanges = $config[self::TRUSTED_IPS_CONFIG];
         if ( ! is_array($newTrustedIpRanges)) {
-            throw new \InvalidArgumentException(
+            throw new EmailServiceClientException(
                 'The config entry for ' . self::TRUSTED_IPS_CONFIG .
                 ' must be an array.',
                 1494531200
@@ -137,7 +143,7 @@ class EmailServiceClient extends BaseClient
      * @param array $config An array key/value pairs of attributes for the new
      *     email.
      * @return array An array of information about the email.
-     * @throws Exception
+     * @throws EmailServiceClientException
      */
     public function email(array $config = [])
     {
@@ -183,7 +189,7 @@ class EmailServiceClient extends BaseClient
 
     protected function reportUnexpectedResponse($response, $uniqueErrorCode)
     {
-        throw new Exception(
+        throw new EmailServiceClientException(
             sprintf(
                 'Unexpected response: %s',
                 var_export($response, true)
@@ -206,7 +212,7 @@ class EmailServiceClient extends BaseClient
         );
 
         if ( ! $this->isTrustedIpAddress($serviceIp)) {
-            throw new Exception(
+            throw new EmailServiceClientException(
                 'The service has an IP that is not trusted ... ' . $serviceIp,
                 1494531300
             );
