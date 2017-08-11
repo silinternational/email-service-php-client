@@ -276,7 +276,7 @@ class RequestContext implements Context
     public function anInvalidargumentExceptionWillBeThrown()
     {
         $e = $this->exceptionThrown;
-        $expectedException = 'InvalidArgumentException';
+        $expectedException = 'Sil\EmailService\Client\EmailServiceClientException';
 
         if ($e === null) {
             $msg = 'Expected an exception with code ' . $expectedException .
