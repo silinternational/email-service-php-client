@@ -1,6 +1,7 @@
 <?php
 namespace Sil\EmailService\Client\features\request;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Context\Context;
@@ -269,4 +270,20 @@ class RequestContext implements Context
         $this->getEmailServiceClient()->email($this->requestData);
     }
 
+
+    /**
+     * @Given I have provided a baseUri
+     */
+    public function iHaveProvidedABaseuri()
+    {
+        $this->baseUri = 'https://api.example.com/';
+    }
+
+    /**
+     * @Given I have not provided a list of trusted IP ranges
+     */
+    public function iHaveNotProvidedAListOfTrustedIpRanges()
+    {
+        unset($this->config['trusted_ip_ranges']);
+    }
 }

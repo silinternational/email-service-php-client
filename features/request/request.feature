@@ -25,9 +25,10 @@ Feature: Formatting requests for sending to the Email Service API
     When I create the emailServiceClient
     Then an exception will be thrown
 
-  Scenario: Checking client with the assert_valid_ip not given and the trusted_ip_ranges value missing
-    Given I am using a baseUri of "https://api.example.com/"
+  Scenario: Requiring a trusted_ip_ranges value when assert_valid_ip is missing
+    Given I have provided a baseUri
       And I have not indicated whether the email service ip should be validated
+      And I have not provided a list of trusted IP ranges
     When I create the emailServiceClient
     Then an exception will be thrown
 
