@@ -44,7 +44,7 @@ class EmailServiceClient extends BaseClient
         if (empty($baseUri)) {
             throw new EmailServiceClientException(
                 'Please provide a base URI for the Email Service.',
-                1494531101
+                1503511656
             );
         }
 
@@ -53,7 +53,7 @@ class EmailServiceClient extends BaseClient
         if (empty($accessToken)) {
             throw new EmailServiceClientException(
                 'Please provide an access token for the Email Service.',
-                1494531108
+                1503511657
             );
         }
 
@@ -112,7 +112,7 @@ class EmailServiceClient extends BaseClient
                 ' must be set (as an array) when ' .
                 self::ASSERT_VALID_IP_CONFIG .
                 ' is not set or is set to True.',
-                1494531150
+                1503511658
             );
         }
 
@@ -125,7 +125,7 @@ class EmailServiceClient extends BaseClient
             throw new EmailServiceClientException(
                 'The config entry for ' . self::TRUSTED_IPS_CONFIG .
                 ' must be an array.',
-                1494531200
+                1503511659
             );
         }
 
@@ -154,7 +154,7 @@ class EmailServiceClient extends BaseClient
             return $this->getResultAsArrayWithoutStatusCode($result);
         }
         
-        $this->reportUnexpectedResponse($result, 1490802526);
+        $this->reportUnexpectedResponse($result, 1503511660);
     }
     
     /**
@@ -184,7 +184,7 @@ class EmailServiceClient extends BaseClient
             return 'OK';
         }
 
-        $this->reportUnexpectedResponse($result, 1490806100);
+        $this->reportUnexpectedResponse($result, 1503511661);
     }
 
     protected function reportUnexpectedResponse($response, $uniqueErrorCode)
@@ -214,7 +214,7 @@ class EmailServiceClient extends BaseClient
         if ( ! $this->isTrustedIpAddress($serviceIp)) {
             throw new EmailServiceClientException(
                 'The service has an IP that is not trusted ... ' . $serviceIp,
-                1494531300
+                1503511662
             );
         }
     }
