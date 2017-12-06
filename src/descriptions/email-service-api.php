@@ -3,7 +3,7 @@
         'getSiteStatusInternal' => [
             'httpMethod' => 'GET',
             'uri' => '/site/status',
-            'responseModel' => 'Result',
+            'responseModel' => 'Status',
         ],
         'emailInternal' => [
             'httpMethod' => 'POST',
@@ -51,6 +51,12 @@
             ],
             'additionalProperties' => [
                 'location' => 'json'
+            ],
+        ],
+        'Status' => [
+            'type' => 'object',
+            'properties' => [
+                'statusCode' => ['location' => 'statusCode'],
             ],
         ],
     ]
