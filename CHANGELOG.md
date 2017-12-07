@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.2] - 2017-12-07
+### Fixed 
+- Stop trying to interpret site-status response content as JSON. This should
+  resolve the `json_decode` syntax error messages.
+
 ## [2.0.1] - 2017-08-23
 ### Changed
 - Change error codes to be unique (not duplicates of those in `IdBrokerClient`).
@@ -16,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.0] - 2017-07-24
 
-[Unreleased]: https://github.com/silinternational/email-service-php-client/compare/2.0.1...develop
+[Unreleased]: https://github.com/silinternational/email-service-php-client/compare/2.0.2...develop
+[2.0.2]: https://github.com/silinternational/email-service-php-client/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/silinternational/email-service-php-client/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/silinternational/email-service-php-client/compare/1.0.0...2.0.0
