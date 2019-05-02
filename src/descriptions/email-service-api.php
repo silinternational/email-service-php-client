@@ -40,6 +40,16 @@
                     'type' => 'string',
                     'location' => 'json',
                 ],
+                'send_after' => [
+                    'required' => false,
+                    'type' => 'string',
+                    'location' => 'json',
+                ],
+                'delay_seconds' => [
+                    'required' => false,
+                    'type' => 'string',
+                    'location' => 'json',
+                ],
             ],
         ],
     ],

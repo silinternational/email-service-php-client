@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- Add delayed-send options: `delay_seconds` and `send_after`
 
 ## [2.0.2] - 2017-12-07
 ### Fixed 
