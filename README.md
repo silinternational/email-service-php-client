@@ -54,7 +54,7 @@ $email = $emailServiceClient->email([
 ]);
 ```
 
-Or to scheduled an email, use `send_after` with a Unix timestamp:
+Or to schedule an email, use `send_after` with a Unix timestamp:
 
 ```php
 $email = $emailServiceClient->email([
