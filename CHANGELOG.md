@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.2.0] - 2019-05-02
+- Add delayed-send options: `delay_seconds` and `send_after`
+
 ## [2.0.2] - 2017-12-07
 ### Fixed 
 - Stop trying to interpret site-status response content as JSON. This should
@@ -21,7 +24,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.0] - 2017-07-24
 
-[Unreleased]: https://github.com/silinternational/email-service-php-client/compare/2.0.2...develop
+[Unreleased]: https://github.com/silinternational/email-service-php-client/compare/2.2.0...develop
+[2.2.0]: https://github.com/silinternational/email-service-php-client/compare/2.0.1...2.2.0
 [2.0.2]: https://github.com/silinternational/email-service-php-client/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/silinternational/email-service-php-client/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/silinternational/email-service-php-client/compare/1.0.0...2.0.0

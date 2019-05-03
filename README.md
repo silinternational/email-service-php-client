@@ -43,6 +43,27 @@ $email = $emailServiceClient->email([
 ]);
 ```
 
+To send an email with a delay of a fixed amount of time:`
+
+```php
+$email = $emailServiceClient->email([
+    "to_address" => "test@domain.com",
+    "subject" => "Test Subject",
+    "html_body" => "<b>this is html</b>",
+    "delay_seconds" => "3600",
+]);
+```
+
+Or to schedule an email, use `send_after` with a Unix timestamp:
+
+```php
+$email = $emailServiceClient->email([
+    "to_address" => "test@domain.com",
+    "subject" => "Test Subject",
+    "html_body" => "<b>this is html</b>",
+    "send_after" => "1556825944",
+]);
+```
 
 ## Tests ##
 

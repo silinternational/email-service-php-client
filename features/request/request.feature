@@ -40,6 +40,9 @@ Feature: Formatting requests for sending to the Email Service API
       And I provide a "subject" of "Test Subject"
       And I provide a "text_body" of "this is text"
       And I provide a "html_body" of "<b>this is html</b>"
+# Normally `send_after` and `delay_seconds` would not be allowed together
+      And I provide a "send_after" of "1556819056"
+      And I provide a "delay_seconds" of "3600"
     When I call email
     Then the method should be "POST"
       And the url should be "https://api.example.com/email"
@@ -51,6 +54,8 @@ Feature: Formatting requests for sending to the Email Service API
           "cc_address": "other@domain.com",
           "subject": "Test Subject",
           "text_body": "this is text",
-          "html_body": "<b>this is html</b>"
+          "html_body": "<b>this is html</b>",
+          "send_after": "1556819056",
+          "delay_seconds": "3600"
         }
         """
