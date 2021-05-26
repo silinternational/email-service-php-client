@@ -3,7 +3,7 @@ version: "2"
 services:
 
   php:
-    image: silintl/php7
+    image: silintl/php7-apache:7.4.19
     volumes:
       - ./:/data
     extra_hosts:

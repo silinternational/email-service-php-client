@@ -2,7 +2,8 @@
 namespace Sil\EmailService\Client;
 
 use GuzzleHttp\Command\Result;
-use IPBlock;
+use IPLib\Range\RangeInterface;
+use IPLib\Factory;
 
 /**
  * Email Service API client implemented with Guzzle.
@@ -19,7 +20,7 @@ class EmailServiceClient extends BaseClient
     /**
      * The list of trusted IP address ranges (aka. blocks).
      *
-     * @var IPBlock[]
+     * @var RangeInterface[]
      */
     private $trustedIpRanges = [];
 
@@ -130,8 +131,7 @@ class EmailServiceClient extends BaseClient
         }
 
         foreach ($newTrustedIpRanges as $nextIpRange) {
-            $ipBlock = IPBlock::create($nextIpRange);
-            $this->trustedIpRanges[] = $ipBlock;
+            $this->trustedIpRanges[] = Factory::rangeFromString($nextIpRange);
         }
 
         $this->assertTrustedIp();
@@ -228,7 +228,8 @@ class EmailServiceClient extends BaseClient
     private function isTrustedIpAddress($ipAddress)
     {
         foreach ($this->trustedIpRanges as $trustedIpBlock) {
-            if ($trustedIpBlock->containsIP($ipAddress)) {
+            $addr = Factory::addressFromString($ipAddress);
+            if ($addr !== null && $trustedIpBlock->contains($addr)) {
                 return true;
             }
         }
