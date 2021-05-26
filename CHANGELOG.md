@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [2.3.0] - 2021-05-26
 ### Changed
 - changed IP address range library to remove dependency on php gmp extension
 
@@ -26,7 +28,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.0] - 2017-07-24
 
-[Unreleased]: https://github.com/silinternational/email-service-php-client/compare/2.2.0...develop
+[Unreleased]: https://github.com/silinternational/email-service-php-client/compare/2.3.0...develop
+[2.3.0]: https://github.com/silinternational/email-service-php-client/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/silinternational/email-service-php-client/compare/2.0.1...2.2.0
 [2.0.2]: https://github.com/silinternational/email-service-php-client/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/silinternational/email-service-php-client/compare/2.0.0...2.0.1
