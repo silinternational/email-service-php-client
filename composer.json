@@ -8,8 +8,7 @@
     "php": ">=7.0",
     "guzzlehttp/guzzle-services": "^1.1",
     "roave/security-advisories": "dev-master",
-    "mlocati/ip-lib": "^1.14",
-    "aws/aws-sdk-php": "^3.136"
+    "mlocati/ip-lib": "^1.14"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.0",
