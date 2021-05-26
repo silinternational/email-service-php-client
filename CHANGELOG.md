@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- changed IP address range library to remove dependency on php gmp extension
 
 ## [2.2.0] - 2019-05-02
 - Add delayed-send options: `delay_seconds` and `send_after`
