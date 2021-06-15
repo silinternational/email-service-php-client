@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [2.3.0] - 2021-05-26
+## [2.3.0] - 2021-06-15
 ### Changed
 - changed IP address range library to remove dependency on php gmp extension
 
