@@ -310,8 +310,11 @@ class RequestContext implements Context
     private function isJson(string $value): bool
     {
         try {
-            json_decode($value, true);
             $isJson = true;
+            $decoded = json_decode($value, true);
+            if ($decoded === null) {
+                $isJson = false;
+            }
         } catch (Throwable $throwable) {
             $isJson = false;
         }
