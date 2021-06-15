@@ -1,18 +1,17 @@
 <?php
 namespace Sil\EmailService\Client\features\request;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Gherkin\Node\TableNode;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Context\Context;
+use Exception;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\Constraint\IsJson;
 use Sil\EmailService\Client\EmailServiceClient;
+use Throwable;
+use Webmozart\Assert\Assert;
 
 /**
  * Defines application features from the specific context.
@@ -42,12 +41,15 @@ class RequestContext implements Context
     
     protected function assertSame($expected, $actual)
     {
-        Assert::assertSame($expected, $actual, sprintf(
-            "Expected %s,\n"
-            . "     not %s.",
-            var_export($expected, true),
-            var_export($actual, true)
-        ));
+        Assert::same(
+            $actual,
+            $expected,
+            sprintf(
+                "Expected %s,\n     not %s.",
+                var_export($expected, true),
+                var_export($actual, true)
+            )
+        );
     }
     
     protected function getHttpClientHandlerForTests()
@@ -127,7 +129,8 @@ class RequestContext implements Context
     {
         $request = $this->getRequestFromHistory();
         $bodyText = (string)$request->getBody();
-        Assert::assertThat($bodyText, new IsJson());
+        $isJson = $this->isJson($bodyText);
+        Assert::true($isJson, 'Was expecting body to be JSON');
     }
     
     /**
@@ -147,7 +150,11 @@ class RequestContext implements Context
     {
         $request = $this->getRequestFromHistory();
         $bodyText = (string)$request->getBody();
-        Assert::assertNotContains($fieldName, $bodyText);
+        Assert::notContains(
+            $bodyText,
+            $fieldName,
+            sprintf('The body should not contain %s', $fieldName)
+        );
     }
 
     /**
@@ -217,7 +224,7 @@ class RequestContext implements Context
     {
         $request = $this->getRequestFromHistory();
         $headerLine = $request->getHeaderLine('Authorization');
-        Assert::assertContains('Bearer ', $headerLine);
+        Assert::contains($headerLine, 'Bearer ');
     }
 
     /**
@@ -225,10 +232,23 @@ class RequestContext implements Context
      */
     public function theBodyShouldEqualTheFollowing(PyStringNode $expectedBodyText)
     {
+        $isJson = $this->isJson((string)$expectedBodyText);
+        Assert::true($isJson, 'Expected body text should be JSON');
+
         $request = $this->getRequestFromHistory();
-        Assert::assertJsonStringEqualsJsonString(
-            (string)$expectedBodyText,
-            (string)$request->getBody()
+        $actualBodyText = $request->getBody();
+        $isJson = $this->isJson((string)$actualBodyText);
+        Assert::true($isJson, 'Actual body text should be JSON');
+
+        $prettyExpectedBodyText = json_encode(json_decode($expectedBodyText, true));
+        $prettyActualBodyText = json_encode(json_decode($actualBodyText, true));
+        Assert::same(
+            $prettyExpectedBodyText,
+            $prettyActualBodyText,
+            sprintf(
+                'The body text (%s) is not the expected body text',
+                $prettyActualBodyText
+            )
         );
     }
 
@@ -248,7 +268,7 @@ class RequestContext implements Context
         $this->exceptionThrown = null;
         try {
             $this->getEmailServiceClient();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->exceptionThrown = $e;
         }
 
@@ -259,7 +279,7 @@ class RequestContext implements Context
      */
     public function anExceptionWillBeThrown()
     {
-        Assert::assertInstanceOf('Exception', $this->exceptionThrown);
+        Assert::isInstanceOf($this->exceptionThrown, Exception::class);
     }
 
     /**
@@ -285,5 +305,19 @@ class RequestContext implements Context
     public function iHaveNotProvidedAListOfTrustedIpRanges()
     {
         unset($this->config['trusted_ip_ranges']);
+    }
+
+    private function isJson(string $value): bool
+    {
+        try {
+            $isJson = true;
+            $decoded = json_decode($value, true);
+            if ($decoded === null) {
+                $isJson = false;
+            }
+        } catch (Throwable $throwable) {
+            $isJson = false;
+        }
+        return $isJson;
     }
 }

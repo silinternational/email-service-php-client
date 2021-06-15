@@ -1,5 +1,5 @@
 php:
-  image: silintl/php7
+  image: silintl/php7:7.4
   volumes:
     - ./:/data
   extra_hosts:

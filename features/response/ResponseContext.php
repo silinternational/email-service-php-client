@@ -7,8 +7,8 @@ use Exception;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\Assert;
 use Sil\EmailService\Client\EmailServiceClient;
+use Webmozart\Assert\Assert;
 
 /**
  * Defines application features from the specific context.
@@ -22,7 +22,7 @@ class ResponseContext implements Context
     
     protected function getHttpClientHandlerForTests()
     {
-        Assert::assertNotEmpty(
+        Assert::notEmpty(
             $this->response,
             'You need to define the response before you can pretend to call the API.'
         );
@@ -81,7 +81,7 @@ class ResponseContext implements Context
      */
     public function theResultShouldNotContainAnErrorMessage()
     {
-        Assert::assertArrayNotHasKey('message', $this->result);
+        Assert::keyNotExists($this->result, 'message');
     }
     
     /**
@@ -89,7 +89,7 @@ class ResponseContext implements Context
      */
     public function theResultShouldContainAnErrorMessage()
     {
-        Assert::assertArrayHasKey('message', $this->result);
+        Assert::keyExists($this->result, 'message');
     }
 
     /**
@@ -115,7 +115,7 @@ class ResponseContext implements Context
      */
     public function anExceptionShouldNotHaveBeenThrown()
     {
-        Assert::assertNull($this->exceptionThrown);
+        Assert::null($this->exceptionThrown);
     }
 
     /**
@@ -123,7 +123,7 @@ class ResponseContext implements Context
      */
     public function anExceptionShouldHaveBeenThrown()
     {
-        Assert::assertInstanceOf(Exception::class, $this->exceptionThrown);
+        Assert::isInstanceOf($this->exceptionThrown, Exception::class);
     }
 
     /**
@@ -131,6 +131,6 @@ class ResponseContext implements Context
      */
     public function theResultShouldBeAnArray()
     {
-        Assert::assertInternalType('array', $this->result);
+        Assert::isArray($this->result);
     }
 }
