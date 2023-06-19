@@ -207,7 +207,8 @@ class EmailServiceClient extends BaseClient
     private function assertTrustedIp()
     {
         $baseHost = parse_url($this->serviceUri, PHP_URL_HOST);
-        if ($baseHost == ($serviceIp = gethostbyname($baseHost))) {
+        $serviceIp = gethostbyname($baseHost);
+        if ($serviceIp == $baseHost) {
             throw new Exception(
                 'DNS lookup failure on email service host ' . $baseHost,
                 1687147214
