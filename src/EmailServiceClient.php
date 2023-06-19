@@ -50,7 +50,7 @@ class EmailServiceClient extends BaseClient
         }
 
         $this->serviceUri = $baseUri;
-        
+
         if (empty($accessToken)) {
             throw new EmailServiceClientException(
                 'Please provide an access token for the Email Service.',
@@ -136,7 +136,7 @@ class EmailServiceClient extends BaseClient
 
         $this->assertTrustedIp();
     }
-    
+
     /**
      * Create an email with the given information.
      *
@@ -149,14 +149,14 @@ class EmailServiceClient extends BaseClient
     {
         $result = $this->emailInternal($config);
         $statusCode = (int)$result['statusCode'];
-        
+
         if ($statusCode >= 200 && $statusCode < 300) {
             return $this->getResultAsArrayWithoutStatusCode($result);
         }
-        
+
         $this->reportUnexpectedResponse($result, 1503511660);
     }
-    
+
     /**
      * Convert the result of the Guzzle call to an array without a status code.
      *
@@ -207,9 +207,12 @@ class EmailServiceClient extends BaseClient
     private function assertTrustedIp()
     {
         $baseHost = parse_url($this->serviceUri, PHP_URL_HOST);
-        $serviceIp = gethostbyname(
-            $baseHost
-        );
+        if ($baseHost == ($serviceIp = gethostbyname($baseHost))) {
+            throw new Exception(
+                'DNS lookup failure on email service host ' . $baseHost,
+                1687147214
+            );
+        }
 
         if ( ! $this->isTrustedIpAddress($serviceIp)) {
             throw new EmailServiceClientException(
