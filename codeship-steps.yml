@@ -1,3 +1,0 @@
-- name: test
-  service: php
-  command: ./run-tests.sh
