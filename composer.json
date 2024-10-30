@@ -17,12 +17,8 @@
   },
   "authors": [
     {
-      "name": "Phillip Shipley",
-      "email": "phillip_shipley@sil.org"
-    },
-    {
-      "name": "Matt Henderson",
-      "email": "matt_henderson@sil.org"
+      "name": "SIL GTIS",
+      "email": "gtis_itse_support+idp@sil.org"
     }
   ],
   "autoload": {
